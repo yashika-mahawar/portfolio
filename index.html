@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yashika Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.75), rgba(20, 0, 0, 0.9)),
+                url("stbg2.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            cursor: auto;
+            color: #f5f5f5;
+            transition: background 0.8s ease, filter 0.8s ease;
+        }
+
+        /* ================= CURTAIN ================= */
+
+        .curtain-container {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .curtain {
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to bottom, #300000, #8b0000, #300000);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+            transition: 1.8s ease-in-out;
+        }
+
+        .open .left {
+            transform: translateX(-100%);
+        }
+
+        .open .right {
+            transform: translateX(100%);
+        }
+
+        /* After curtain opens, allow clicking the page content underneath. */
+        .curtain-container.open {
+            pointer-events: none;
+        }
+
+        /* ================= WELCOME TEXT ================= */
+
+        .welcome-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2000;
+            font-family: 'Creepster', cursive;
+            color: black;
+            text-shadow: 0 0 20px red, 0 0 40px darkred;
+            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            border: 2px solid rgba(255, 0, 60, 0.7);
+            backdrop-filter: blur(4px);
+        }
+
+        .welcome-text h1 {
+            font-size: 36px;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+
+        .enter-btn {
+            margin-top: 15px;
+            padding: 12px 36px;
+            font-size: 22px;
+            background: black;
+            color: #ff003c;
+            border: 2px solid #ff003c;
+            cursor: pointer;
+            transition: 0.4s;
+            font-family: 'Creepster', cursive;
+            letter-spacing: 3px;
+        }
+
+        .enter-btn:hover {
+            background: #ff003c;
+            color: black;
+            box-shadow: 0 0 25px red;
+        }
+
+        /* ================= MAIN PORTFOLIO ================= */
+
+        .main-content {
+            opacity: 0;
+            transition: 2s;
+            padding: 50px 8vw;
+            font-family: Arial, sans-serif;
+        }
+
+        .show-content {
+            opacity: 1;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            scroll-snap-align: start;
+        }
+
+        .section h2 {
+            color: #ff003c;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px red;
+            font-family: 'Creepster', cursive;
+            letter-spacing: 4px;
+            font-size: 32px;
+        }
+
+        .section p {
+            line-height: 1.8;
+        }
+
+        /* =========== ORIGIN (ABOUT) SECTION =========== */
+
+        .origin-section h1 {
+            font-family: 'Creepster', cursive;
+            font-size: 40px;
+            letter-spacing: 5px;
+            color: white;
+            text-shadow: 0 0 15px red;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .origin-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            flex-direction: row-reverse;
+        }
+
+        .origin-img img {
+            width: 350px;
+            max-width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 4px solid #ff003c;
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.5);
+            transition: 0.4s;
+        }
+
+        .origin-img img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 40px rgba(255, 0, 60, 0.8);
+        }
+
+        .origin-text {
+            max-width: 600px;
+            font-size: 18px;
+            line-height: 1.8;
+            padding: 25px;
+            background: rgba(17, 18, 43, 0.95);
+            border-radius: 15px;
+            border-left: 6px solid #ff003c;
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.4);
+        }
+
+        .origin-text a {
+            color: #ff6688;
+            text-decoration: underline;
+            cursor: pointer;
+            
+        }
+
+        .origin-text a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 8px #ff003c;
+        }
+
+        .intro-link {
+            display: inline-block;
+            padding: 6px 10px;
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0.25);
+            margin-top: 6px;
+            cursor: pointer;
+        }
+
+        .intro-link:hover {
+            background: rgba(255, 0, 60, 0.18);
+            box-shadow: 0 0 18px rgba(255, 0, 60, 0.35);
+            text-shadow: 0 0 8px #ff003c;
+        }
+
+        /* ================= EDUCATION TABLE ================= */
+        .edu-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 16px;
+            color: #f5f5f5;
+            background: rgba(17, 18, 43, 0.55);
+            border: 1px solid rgba(255, 0, 60, 0.45);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .edu-table thead th {
+            background: rgba(255, 0, 60, 0.16);
+            border-bottom: 2px solid #ff003c;
+            padding: 10px 8px;
+            text-align: left;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .edu-table tbody td {
+            padding: 10px 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .edu-table tbody tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .edu-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ===== SUPERPOWERS GRID ===== */
+
+        .super-section h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .super-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .super-card {
+            background: rgba(10, 10, 30, 0.95);
+            border: 3px solid #ff003c;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            min-height: 140px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.4);
+            transition: 0.3s;
+        }
+
+        .super-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 0 40px red;
+        }
+
+        /* Scroll enabled after opening */
+        body.opened {
+            overflow: auto;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .main-content {
+            scroll-snap-type: y mandatory;
+        }
+
+        /* ========= NAV BUTTONS ========= */
+
+        .nav-buttons {
+            position: fixed;
+            right: 20px;
+            bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 3000;
+        }
+
+        .nav-buttons button {
+            padding: 8px 10px;
+            font-size: 18px;
+            background: black;
+            color: #ff003c;
+            border: 2px solid #ff003c;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-buttons button:hover {
+            background: #ff003c;
+            color: black;
+        }
+
+        /* ====== UPSIDE DOWN THEME ====== */
+
+        body.upside {
+            background:
+                linear-gradient(rgba(5, 0, 10, 0.95), rgba(0, 0, 0, 1)),
+                url("stb.jpg");
+            filter: hue-rotate(210deg) saturate(1.4) contrast(1.2) brightness(0.8);
+        }
+
+        /* content flip (canvases stable) */
+        body.upside #main,
+        body.upside #curtain,
+        body.upside #welcome,
+        body.upside #thunder-overlay,
+        body.upside .nav-buttons,
+        body.upside #bg-particles,
+        body.upside #cursor-particles {
+            transform: rotate(180deg);
+        }
+
+        /* subtle red mist overlay when upside down */
+        body.upside::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 10%, rgba(255, 0, 80, 0.25), transparent 60%),
+                radial-gradient(circle at 80% 90%, rgba(255, 0, 40, 0.2), transparent 55%);
+            mix-blend-mode: screen;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ========== THUNDER / LIGHTNING OVERLAY ========== */
+
+        #thunder-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 3500;
+            background:
+                radial-gradient(circle at 30% 10%, rgba(255, 255, 255, 0.9), transparent 55%),
+                radial-gradient(circle at 70% 60%, rgba(150, 210, 255, 0.7), transparent 60%);
+            opacity: 0;
+        }
+
+        #thunder-overlay.active {
+            animation: thunderFlash 0.6s ease-out;
+        }
+
+        @keyframes thunderFlash {
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            25% {
+                opacity: 0.3;
+            }
+
+            40% {
+                opacity: 0.9;
+            }
+
+            60% {
+                opacity: 0.1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* ========== PARTICLE CANVASES ========== */
+
+        #bg-particles,
+        #cursor-particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* Hide custom canvas cursor; use normal browser cursor instead. */
+        #cursor-particles {
+            display: none;
+        }
+
+        #bg-particles {
+            z-index: 50;
+            /* behind content */
+        }
+        #contact {
+    position: relative;
+    z-index: 5000;
+}
+       #cursor-particles {
+            z-index: 100;
+        }
+
+        /* ====== RESPONSIVE ====== */
+
+        @media(max-width:768px) {
+            .welcome-text h1 {
+                font-size: 26px;
+            }
+
+            .origin-section h1 {
+                font-size: 30px;
+            }
+
+            .origin-text {
+                font-size: 16px;
+                padding: 18px;
+            }
+
+            .section {
+                min-height: auto;
+                padding: 40px 0;
+            }
+
+            .main-content {
+                padding: 40px 5vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BACKGROUND CONSTELLATION CANVAS -->
+    <canvas id="bg-particles"></canvas>
+
+    <!-- DEMOGORGON CURSOR CANVAS -->
+    <canvas id="cursor-particles"></canvas>
+
+    <!-- MUSIC -->
+    <audio id="bg-music" src="running_up_that_hill.mp3" loop></audio>
+    <!-- THUNDER SOUND -->
+    <audio id="thunder-sound" src="thunder.mp3"></audio>
+
+    <!-- THUNDER LIGHT OVERLAY -->
+    <div id="thunder-overlay"></div>
+
+    <!-- CURTAIN -->
+    <div class="curtain-container" id="curtain">
+        <div class="curtain left"></div>
+        <div class="curtain right"></div>
+    </div>
+
+    <!-- WELCOME SCREEN -->
+    <div class="welcome-text" id="welcome">
+        <h1>Welcome to Yashika's Portfolio</h1>
+        <button class="enter-btn" onclick="openCurtain()">ENTER</button>
+    </div>
+
+    <!-- MAIN PORTFOLIO -->
+    <div class="main-content" id="main">
+
+        <!-- ABOUT / ORIGIN -->
+        <div class="section origin-section" id="about">
+            <h1>YASHIKA'S PORTFOLIO</h1>
+
+            <div class="origin-content">
+                <div class="origin-img">
+                    <img src="Gemini_Generated_Image_z3wsjpz3wsjpz3ws.png" alt="Yashika Photo">
+                </div>
+
+                <div class="origin-text">
+                    <p>
+                        Hello, I’m <strong>Yashika Mahawar</strong>, a passionate and dedicated
+                        Frontend Developer with a strong enthusiasm for crafting creative, responsive,
+                        and user-friendly web experiences. I enjoy transforming ideas into visually
+                        appealing and interactive digital interfaces that not only look great but also
+                        provide seamless functionality.
+                        <br><br>
+                        With a keen eye for design and a solid understanding of modern web technologies,
+                        I focus on building clean, efficient, and scalable solutions. I am constantly
+                        exploring new tools, frameworks, and industry trends to enhance my skills and
+                        deliver high-quality work. My goal is to create engaging web experiences that
+                        leave a lasting impression while ensuring performance, accessibility, and
+                        usability at every step.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESUME SUMMARY -->
+        <div class="section super-section" id="resume">
+            <h2>INTRODUCTION</h2>
+            <div class="origin-text" style="max-width:900px;margin:0 auto;">
+                <p><strong>Name:</strong> Yashika Mahawar</p>
+                <p><strong>Degree:</strong> Bachelor of Computer Applications (Cyber Security)</p>
+                <p><strong>Institute:</strong> ICFAI University Jaipur</p>
+                <p><strong>Phone:</strong> +91-6376253939</p>
+                <p><strong>Email:</strong> <a href="mailto:yashikamahawar1805@gmail.com">yashikamahawar1805@gmail.com</a></p>
+                <p><strong>GitHub:</strong>
+                    <a class="intro-link" href="https://github.com/honeymahawar18050309-oss" target="_blank" rel="noopener noreferrer">View GitHub</a>
+                </p>
+                <p><strong>LinkedIn:</strong>
+                    <a class="intro-link" href="https://www.linkedin.com/in/yashika-mahawar-0810a2315/" target="_blank" rel="noopener noreferrer">View LinkedIn</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="section super-section" id="education">
+            <h2>EDUCATION</h2>
+            <div class="origin-text" style="max-width:900px;margin:0 auto;overflow-x:auto;">
+                <table class="edu-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Degree/Certificate</th>
+                            <th>Institute</th>
+                            <th>CGPA/Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-2026</td>
+                            <td>BCA (Cyber Security)</td>
+                            <td>ICFAI University Jaipur</td>
+                            <td>8.87 CGPA</td>
+                        </tr>
+                        <tr>
+                            <td>2021</td>
+                            <td>RBSE (XII)</td>
+                            <td>Royal International School</td>
+                            <td>96.8%</td>
+                        </tr>
+                        <tr>
+                            <td>2019</td>
+                            <td>RBSE (X)</td>
+                            <td>Royal International School</td>
+                            <td>84.4%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- DETAILED PROJECTS -->
+        <div class="section super-section" id="detailed-projects">
+            <h2>DETAILED PROJECTS</h2>
+            <div class="origin-text" style="max-width:900px;margin:0 auto;">
+                <h3 style="color:#ff003c;margin-bottom:6px;">NovaWeb Website <span style="font-weight:normal;color:#f5f5f5;">| Personal Project</span></h3>
+                <p style="margin-bottom:12px;">Responsive multi-page website showcasing modern web layouts and UI components.</p>
+
+                <h3 style="color:#ff003c;margin-bottom:6px;">UrbanCart Website <span style="font-weight:normal;color:#f5f5f5;">| Personal Project</span></h3>
+                <p style="margin-bottom:12px;">Basic e-commerce front-end with product listings, cart UI, and responsive design.</p>
+
+                <h3 style="color:#ff003c;margin-bottom:6px;">To-Do List <span style="font-weight:normal;color:#f5f5f5;">| Personal Project</span></h3>
+                <p style="margin-bottom:12px;">Task management web app with add, delete, and mark-as-done functionality.</p>
+
+                <h3 style="color:#ff003c;margin-bottom:6px;">Spotify &amp; Amazon Clone <span style="font-weight:normal;color:#f5f5f5;">| Personal Project</span></h3>
+                <p style="margin-bottom:12px;">UI clones recreating core pages and layouts of Spotify and Amazon for practice.</p>
+
+                <h3 style="color:#ff003c;margin-bottom:6px;">Cafe Website <span style="font-weight:normal;color:#f5f5f5;">| Personal Project</span></h3>
+                <p style="margin-bottom:12px;">Landing page for a cafe with menu section, gallery, and contact information.</p>
+
+                <h3 style="color:#ff003c;margin-bottom:6px;">Difference Between Linked List and Array (DSA Study) <span style="font-weight:normal;color:#f5f5f5;">| Academic Concept Project</span></h3>
+                <p style="margin-bottom:12px;">Analysed and documented key differences in memory allocation, operations, and use cases.</p>
+
+                <h3 style="color:#ff003c;margin-bottom:6px;">Image Steganography Using LSB Technique <span style="font-weight:normal;color:#f5f5f5;">| Python Project</span></h3>
+                <p style="margin-bottom:12px;">Implemented Least Significant Bit (LSB) steganography in Python to hide secret messages inside images.</p>
+
+                <h3 style="color:#ff003c;margin-bottom:6px;">Python Mini Project: Calculator with Loop <span style="font-weight:normal;color:#f5f5f5;">| Python Project</span></h3>
+                <p style="margin-bottom:12px;">Built a console-based calculator using loops to perform continuous arithmetic operations.</p>
+
+                <h3 style="color:#ff003c;margin-bottom:6px;">Advanced Password Strength Analyzer <span style="font-weight:normal;color:#f5f5f5;">| Python Project with GUI</span></h3>
+                <p>Created a GUI-based tool in Python to evaluate password strength using length, character variety, and pattern checks.</p>
+            </div>
+        </div>
+
+        <!-- TECHNICAL SKILLS (DETAILED) -->
+        <div class="section super-section" id="tech-skills">
+            <h2>TECHNICAL SKILLS</h2>
+            <div class="origin-text" style="max-width:900px;margin:0 auto;">
+                <p><strong>Programming:</strong> C, C++, Python, Java, HTML, CSS, JavaScript</p>
+                <p><strong>Tools &amp; Platforms:</strong> VS Code, Git, GitHub, Cursor, Figma, npm, Microsoft Azure</p>
+                <p><strong>Databases:</strong> MySQL, MongoDB</p>
+                <p><strong>Operating Systems:</strong> Windows, Linux</p>
+            </div>
+        </div>
+
+        <!-- KEY COURSES -->
+        <div class="section super-section" id="courses">
+            <h2>KEY COURSES TAKEN</h2>
+            <div class="origin-text" style="max-width:900px;margin:0 auto;">
+                <ul style="margin-left:18px;line-height:1.8;">
+                    <li>Design and Analysis of Algorithms</li>
+                    <li>Frontend Development</li>
+                    <li>Backend Development</li>
+                    <li>Database Management Systems</li>
+                    <li>Operating Systems</li>
+                    <li>Computer Networks</li>
+                    <li>Full Stack Web Development</li>
+                    <li>Cybersecurity Basics</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SKILLS -->
+        <div class="section super-section" id="skills">
+            <h2>SKILLS</h2>
+
+            <div class="super-grid">
+                <div class="super-card">HTML5</div>
+                <div class="super-card">CSS3 &amp; Animations</div>
+                <div class="super-card">JavaScript</div>
+                <div class="super-card">React</div>
+            </div>
+        </div>
+
+        <!-- CERTIFICATES -->
+        <div class="section super-section" id="certificates">
+            <h2>CERTIFICATES</h2>
+            <div class="super-grid">
+                <div class="super-card">Full Stack Web Development</div>
+                <div class="super-card">Microsoft Azure</div>
+                <div class="super-card">DSA with Python</div>
+                <div class="super-card">Placement Training by Linux World</div>
+                <div class="super-card">EY Microsoft AI Skills Passport</div>
+                <div class="super-card">HTML</div>
+                <div class="super-card">CSS</div>
+            </div>
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="section super-section" id="projects">
+            <h2>PROJECTS</h2>
+            <div class="super-grid">
+                <div class="super-card">☕ Friends Cafe Website</div>
+                <div class="super-card">JS Animations</div>
+                <div class="super-card">DSA Practice</div>
+                <div class="super-card">More spooky projects coming soon…</div>
+            </div>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="section super-section" id="contact">
+            <h2>CONTACT</h2>
+            <div class="super-grid">
+                <div class="super-card">📧 yashikamahawar1805@gmail.com</div>
+                <div>
+                   <a href="https://www.linkedin.com/in/yashika-mahawar-0810a2315/" 
+   target="_blank" 
+   rel="noopener noreferrer"
+   class="super-card"
+   style="text-decoration:none;">
+   🔗 LinkedIn Profile
+</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- NAV BUTTONS -->
+        <div class="nav-buttons">
+            <button onclick="scrollUp()">⬆</button>
+            <button onclick="scrollDown()">⬇</button>
+        </div>
+
+    </div>
+
+    <script>
+        /* ================= UPSIDE-DOWN TOGGLE ================= */
+
+        document.addEventListener("dblclick", () => {
+            document.body.classList.toggle("upside");
+        });
+
+        /* ================= CURTAIN + MUSIC ================= */
+
+        function openCurtain() {
+            const music = document.getElementById("bg-music");
+            if (music) {
+                music.volume = 0.5;
+                music.play().catch(err => console.warn("Autoplay blocked:", err));
+            }
+
+            const curtain = document.getElementById("curtain");
+            const welcome = document.getElementById("welcome");
+
+            curtain.classList.add("open");
+            welcome.style.display = "none";
+
+            setTimeout(() => {
+                document.body.classList.add("opened");
+                document.getElementById("main").classList.add("show-content");
+                startThunderLoop();
+            }, 1800);
+        }
+
+        /* ================= SCROLL BUTTONS ================= */
+
+        function scrollDown() {
+            window.scrollBy({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollUp() {
+            window.scrollBy({
+                top: -window.innerHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        /* ================= GLOBAL CURSOR POSITION ================= */
+
+        let cursorX = window.innerWidth / 2;
+        let cursorY = window.innerHeight / 2;
+        let isLinkHover = false;
+
+        window.addEventListener("mousemove", (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+            const el = document.elementFromPoint(e.clientX, e.clientY);
+            isLinkHover = !!(el && el.closest && el.closest("a"));
+        });
+
+        /* ================= THUNDER EFFECT ================= */
+
+        const thunderOverlay = document.getElementById("thunder-overlay");
+        const thunderSound = document.getElementById("thunder-sound");
+
+        function thunderStrike() {
+            if (!thunderOverlay) return;
+
+            thunderOverlay.classList.add("active");
+
+            if (thunderSound) {
+                thunderSound.currentTime = 0;
+                thunderSound.volume = 0.9;
+                thunderSound.play().catch(() => { });
+            }
+
+            setTimeout(() => {
+                thunderOverlay.classList.remove("active");
+            }, 600);
+        }
+
+        function startThunderLoop() {
+            const minDelay = 8000;  // 8 sec
+            const maxDelay = 20000; // 20 sec
+
+            function scheduleNext() {
+                const delay = Math.random() * (maxDelay - minDelay) + minDelay;
+                setTimeout(() => {
+                    thunderStrike();
+                    scheduleNext();
+                }, delay);
+            }
+
+            scheduleNext();
+        }
+
+        /* =========================================================
+           BACKGROUND CONSTELLATION PARTICLES
+           ========================================================= */
+
+        const bgCanvas = document.getElementById("bg-particles");
+        const bgCtx = bgCanvas.getContext("2d");
+
+        function resizeBgCanvas() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+        }
+        resizeBgCanvas();
+
+        window.addEventListener("resize", () => {
+            resizeBgCanvas();
+            resizeCursorCanvas();
+        });
+
+        const BG_PARTICLE_COUNT = 130;
+        const bgParticles = [];
+
+        for (let i = 0; i < BG_PARTICLE_COUNT; i++) {
+            bgParticles.push({
+                x: Math.random() * bgCanvas.width,
+                y: Math.random() * bgCanvas.height,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                radius: 1.2 + Math.random() * 1.2
+            });
+        }
+
+        function updateAndDrawBgParticles() {
+            const maxDist = 140;
+            const repelRadius = 90;
+
+            bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+
+            // update particles
+            for (const p of bgParticles) {
+                // slow float
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // soft bounds
+                if (p.x < 0 || p.x > bgCanvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > bgCanvas.height) p.vy *= -1;
+
+                // mouse repel
+                const dx = p.x - cursorX;
+                const dy = p.y - cursorY;
+                const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                if (dist < repelRadius) {
+                    const strength = (repelRadius - dist) / repelRadius * 0.4;
+                    p.x += (dx / dist) * strength * 4;
+                    p.y += (dy / dist) * strength * 4;
+                }
+
+                // draw dot
+                bgCtx.beginPath();
+                bgCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                bgCtx.fillStyle = "rgba(255,0,80,0.8)";
+                bgCtx.shadowColor = "rgba(255,0,80,1)";
+                bgCtx.shadowBlur = 8;
+                bgCtx.fill();
+            }
+
+            // connecting lines
+            bgCtx.shadowBlur = 0;
+            for (let i = 0; i < bgParticles.length; i++) {
+                for (let j = i + 1; j < bgParticles.length; j++) {
+                    const a = bgParticles[i];
+                    const b = bgParticles[j];
+                    const dx = a.x - b.x;
+                    const dy = a.y - b.y;
+                    const d = Math.sqrt(dx * dx + dy * dy);
+                    if (d < maxDist) {
+                        const alpha = 1 - d / maxDist;
+                        bgCtx.beginPath();
+                        bgCtx.moveTo(a.x, a.y);
+                        bgCtx.lineTo(b.x, b.y);
+                        bgCtx.strokeStyle = `rgba(255,0,80,${0.35 * alpha})`;
+                        bgCtx.lineWidth = 1;
+                        bgCtx.stroke();
+                    }
+                }
+            }
+        }
+
+        /* =========================================================
+           DEMOGORGON CURSOR PARTICLE SHAPE
+           ========================================================= */
+
+        const cursorCanvas = document.getElementById("cursor-particles");
+        const cursorCtx = cursorCanvas.getContext("2d");
+
+        function resizeCursorCanvas() {
+            cursorCanvas.width = window.innerWidth;
+            cursorCanvas.height = window.innerHeight;
+        }
+        resizeCursorCanvas();
+
+        const CURSOR_MAX_PARTICLES = 400;
+        const cursorParticles = [];
+        let cursorShapeReady = false;
+        let cursorShapeFailed = false;
+
+        // load shape from PNG alpha
+        const shapeImg = new Image();
+        shapeImg.src = "demogorgon.png";
+
+        shapeImg.onload = () => {
+            const off = document.createElement("canvas");
+            off.width = shapeImg.width;
+            off.height = shapeImg.height;
+            const octx = off.getContext("2d");
+            octx.drawImage(shapeImg, 0, 0);
+            const imgData = octx.getImageData(0, 0, off.width, off.height).data;
+
+            const step = 5; // smaller = more detail
+            const points = [];
+
+            for (let y = 0; y < off.height; y += step) {
+                for (let x = 0; x < off.width; x += step) {
+                    const idx = (y * off.width + x) * 4;
+                    const alpha = imgData[idx + 3];
+                    if (alpha > 120) {
+                        points.push({
+                            ox: x - off.width / 2,
+                            oy: y - off.height / 2
+                        });
+                    }
+                }
+            }
+
+            for (let i = 0; i < CURSOR_MAX_PARTICLES && i < points.length; i++) {
+                const base = points[Math.floor(Math.random() * points.length)];
+                cursorParticles.push({
+                    ox: base.ox,
+                    oy: base.oy,
+                    x: cursorX,
+                    y: cursorY
+                });
+            }
+
+            cursorShapeReady = true;
+        };
+
+        shapeImg.onerror = () => {
+            cursorShapeFailed = true;
+        };
+
+        function updateAndDrawCursorParticles() {
+            cursorCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
+
+            // if image failed -> fallback glowing circle at cursor
+            if (cursorShapeFailed && !cursorShapeReady) {
+                cursorCtx.beginPath();
+                cursorCtx.arc(cursorX, cursorY, 10, 0, Math.PI * 2);
+                cursorCtx.fillStyle = "rgba(255,0,80,0.9)";
+                cursorCtx.shadowColor = "rgba(255,0,120,1)";
+                cursorCtx.shadowBlur = 18;
+                cursorCtx.fill();
+                return;
+            }
+
+            if (!cursorShapeReady) return;
+
+            const scale = 0.6;
+            const easing = 0.22;
+
+            for (const p of cursorParticles) {
+                const targetX = cursorX + p.ox * scale;
+                const targetY = cursorY + p.oy * scale;
+
+                p.x += (targetX - p.x) * easing;
+                p.y += (targetY - p.y) * easing;
+
+                const dx = p.x - cursorX;
+                const dy = p.y - cursorY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                const t = Math.min(dist / 140, 1);
+
+                const r = 255;
+                const g = Math.round(40 + (0 - 40) * t);
+                const b = Math.round(80 + (0 - 80) * t);
+                const alpha = 0.9;
+                const radius = 2.8 - t * 1.2;
+
+                cursorCtx.beginPath();
+                cursorCtx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+                cursorCtx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+                cursorCtx.shadowColor = "rgba(255,0,120,1)";
+                cursorCtx.shadowBlur = 12;
+                cursorCtx.fill();
+            }
+        }
+
+        /* ================= MAIN ANIMATION LOOP ================= */
+
+        function animate() {
+            requestAnimationFrame(animate);
+            updateAndDrawBgParticles();
+            updateAndDrawCursorParticles();
+        }
+
+        animate();
+    </script>
+
+</body>
+
+</html>
