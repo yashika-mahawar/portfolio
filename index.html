@@ -120,7 +120,7 @@
 
         .section {
             margin-bottom: 60px;
-            min-height: 100vh;
+            min-height: auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -282,6 +282,7 @@
             border-radius: 15px;
             box-shadow: 0 0 25px rgba(255, 0, 60, 0.4);
             transition: 0.3s;
+            word-break: break-word;
         }
 
         .super-card:hover {
@@ -435,28 +436,50 @@
         /* ====== RESPONSIVE ====== */
 
         @media(max-width:768px) {
-            .welcome-text h1 {
-                font-size: 26px;
-            }
 
-            .origin-section h1 {
-                font-size: 30px;
-            }
+    body {
+        background-attachment: scroll;   /* mobile pe fixed background issue fix */
+    }
 
-            .origin-text {
-                font-size: 16px;
-                padding: 18px;
-            }
+    .super-grid {
+        grid-template-columns: 1fr;  /* ek row me ek card */
+        gap: 15px;
+    }
 
-            .section {
-                min-height: auto;
-                padding: 40px 0;
-            }
+    .super-card {
+        font-size: 16px;
+        min-height: 110px;
+        padding: 15px;
+    }
 
-            .main-content {
-                padding: 40px 5vw;
-            }
-        }
+    .nav-buttons {
+        right: 10px;
+        bottom: 20px;
+    }
+
+    .nav-buttons button {
+        font-size: 16px;
+        padding: 6px 8px;
+    }
+
+    .origin-img img {
+        width: 260px;
+        height: 360px;
+    }
+
+    .origin-content {
+        gap: 20px;
+    }
+
+    .origin-text {
+        width: 100%;
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+    .super-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}        
+}
     </style>
 </head>
 
